@@ -4,10 +4,12 @@ import cors from 'cors'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import swaggerUi from 'swagger-ui-express'
 import authRoutes from './routes/auth.js'
 import adminRoutes from './routes/admin.js'
 import ownerRoutes from './routes/owner.js'
 import { readDb } from './db.js'
+import { openapiSpec } from './openapi.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataDir = process.env.DATA_DIR
@@ -32,6 +34,18 @@ app.get('/api/health', (_req, res) => {
     users: db.users.length,
   })
 })
+
+app.get('/api/openapi.json', (_req, res) => {
+  res.json(openapiSpec)
+})
+
+app.use(
+  '/api/docs',
+  swaggerUi.serve,
+  swaggerUi.setup(openapiSpec, {
+    customSiteTitle: 'Ubaka Management Portal API',
+  }),
+)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/admin', adminRoutes)
