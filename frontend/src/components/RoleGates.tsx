@@ -28,7 +28,6 @@ export const RequireAuth: React.FC<{ roles?: Array<'SYSTEM_ADMIN' | 'SITE_OWNER'
 
 export const AdminShell: React.FC = () => (
   <AppLayout
-    roleLabel="System administration"
     homePath="/admin"
     navItems={[
       { to: '/admin', label: 'Overview', icon: LayoutDashboard, end: true },
@@ -51,7 +50,6 @@ export const AdminShell: React.FC = () => (
 
 export const OwnerShell: React.FC = () => (
   <AppLayout
-    roleLabel="Site owner portal"
     homePath="/owner"
     navItems={[
       { to: '/owner', label: 'Overview', icon: LayoutDashboard, end: true },

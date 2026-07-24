@@ -15,6 +15,16 @@
   --rose: #e11d48;
   --sky: #0284c7;
 
+  /* Brand accent (construction amber) + status colors */
+  --accent: #f59e0b;
+  --accent-bright: #fbbf24;
+  --accent-dim: rgba(245, 158, 11, 0.16);
+  --green: #059669;
+  --green-dim: rgba(5, 150, 105, 0.14);
+  --violet: #7c3aed;
+  --violet-dim: rgba(124, 58, 237, 0.14);
+  --sky-dim: rgba(2, 132, 199, 0.14);
+
   --canvas: #f0f1f3;
   --canvas-deep: #e6e7eb;
   --surface: #ffffff;
@@ -776,8 +786,9 @@ table.data-table tbody tr:last-child td {
 .status-badge.active,
 .status-badge.completed,
 .status-badge.COMPLETE {
-  background: var(--teal-dim);
-  color: var(--teal);
+  background: var(--green-dim);
+  color: #047857;
+  border: 1px solid rgba(5, 150, 105, 0.32);
 }
 
 .status-badge.incomplete,
@@ -827,9 +838,27 @@ table.data-table tbody tr:last-child td {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: var(--surface-2);
-  color: var(--text-muted);
-  border: 1px solid var(--border);
+  background: var(--accent-dim);
+  color: #b45309;
+  border: 1px solid transparent;
+}
+
+/* Give each stat card in a row its own accent colour */
+.stats-grid .stat-card:nth-child(4n + 1) .stat-card__icon {
+  background: var(--accent-dim);
+  color: #b45309;
+}
+.stats-grid .stat-card:nth-child(4n + 2) .stat-card__icon {
+  background: var(--green-dim);
+  color: var(--green);
+}
+.stats-grid .stat-card:nth-child(4n + 3) .stat-card__icon {
+  background: var(--sky-dim);
+  color: var(--sky);
+}
+.stats-grid .stat-card:nth-child(4n + 4) .stat-card__icon {
+  background: var(--violet-dim);
+  color: var(--violet);
 }
 
 .stat-value {
@@ -1622,15 +1651,24 @@ table.data-table tbody tr:last-child td {
 .status-badge.pending,
 .status-badge.PENDING,
 .status-badge.PENDING_ACTIVATION {
-  background: #ffedd5;
-  color: #9a3412;
+  background: #fff7ed;
+  color: #b45309;
+  border: 1px solid #fed7aa;
 }
 
 .status-badge.approved,
 .status-badge.APPROVED,
+.status-badge.USED,
+.status-badge.ACTIVE {
+  background: var(--green-dim);
+  color: #047857;
+  border: 1px solid rgba(5, 150, 105, 0.32);
+}
+
 .status-badge.AVAILABLE {
-  background: #e0f2fe;
+  background: var(--sky-dim);
   color: #075985;
+  border: 1px solid rgba(2, 132, 199, 0.3);
 }
 
 .status-badge.rejected,
@@ -1640,17 +1678,13 @@ table.data-table tbody tr:last-child td {
 .status-badge.EXPIRED {
   background: #fff1f2;
   color: #9f1239;
+  border: 1px solid #fecdd3;
 }
 
 .status-badge.ASSIGNED {
-  background: #f1f5f9;
-  color: #475569;
-}
-
-.status-badge.USED,
-.status-badge.ACTIVE {
-  background: var(--teal-dim);
-  color: var(--teal);
+  background: #eef2ff;
+  color: #4338ca;
+  border: 1px solid #c7d2fe;
 }
 
 .modal-backdrop {

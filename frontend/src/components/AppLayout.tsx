@@ -14,7 +14,6 @@ type NavItem = {
 type AppLayoutProps = {
   navItems: NavItem[]
   titles: Record<string, { title: string; subtitle: string }>
-  roleLabel: string
   homePath: string
 }
 
@@ -30,7 +29,7 @@ function resolveMeta(
   return match ? titles[match] : fallback
 }
 
-const AppLayout: React.FC<AppLayoutProps> = ({ navItems, titles, roleLabel, homePath }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ navItems, titles, homePath }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -38,11 +37,6 @@ const AppLayout: React.FC<AppLayoutProps> = ({ navItems, titles, roleLabel, home
   const meta = resolveMeta(location.pathname, titles, {
     title: 'Ubaka',
     subtitle: 'Management Portal',
-  })
-  const today = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
   })
 
   const handleLogout = () => {
@@ -86,8 +80,6 @@ const AppLayout: React.FC<AppLayoutProps> = ({ navItems, titles, roleLabel, home
         </nav>
 
         <div className="sidebar__footer">
-          <p className="sidebar__footer-label">{roleLabel}</p>
-          <p className="sidebar__footer-date">{today}</p>
           <div className="sidebar__user">
             <p className="sidebar__user-name">{user?.fullName}</p>
             <p className="sidebar__user-role">{user?.role.replace(/_/g, ' ')}</p>
