@@ -608,6 +608,43 @@ img {
   background: #fff1f2;
 }
 
+/* Colored icon button variants */
+.btn-icon--blue {
+  color: var(--sky);
+  background: var(--sky-dim);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+.btn-icon--blue:hover {
+  color: #075985;
+  border-color: var(--sky);
+  background: rgba(2, 132, 199, 0.22);
+}
+
+.btn-icon--green {
+  color: var(--green);
+  background: var(--green-dim);
+  border-color: rgba(5, 150, 105, 0.32);
+}
+
+.btn-icon--green:hover {
+  color: #047857;
+  border-color: var(--green);
+  background: rgba(5, 150, 105, 0.22);
+}
+
+.btn-icon--red {
+  color: var(--rose);
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.btn-icon--red:hover {
+  color: #9f1239;
+  border-color: var(--rose);
+  background: #ffe4e6;
+}
+
 /* Surfaces / panels */
 
 .panel {
@@ -1675,7 +1712,8 @@ table.data-table tbody tr:last-child td {
 .status-badge.REJECTED,
 .status-badge.REVOKED,
 .status-badge.SUSPENDED,
-.status-badge.EXPIRED {
+.status-badge.EXPIRED,
+.status-badge.DEACTIVATED {
   background: #fff1f2;
   color: #9f1239;
   border: 1px solid #fecdd3;

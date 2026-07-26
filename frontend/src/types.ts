@@ -16,7 +16,7 @@ export interface OwnerRequest {
   companyName: string
   phone: string
   message?: string
-  status: 'PENDING' | 'APPROVED' | 'REJECTED'
+  status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'DEACTIVATED'
   rejectionReason?: string
   createdAt: string
   reviewedAt?: string

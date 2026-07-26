@@ -73,6 +73,30 @@ export async function rejectRequest(id: string, reason?: string) {
   return data
 }
 
+export async function updateOwnerRequest(
+  id: string,
+  payload: {
+    fullName: string
+    email: string
+    companyName: string
+    phone: string
+    message?: string
+  },
+) {
+  const { data } = await api.patch(`/admin/requests/${id}`, payload)
+  return data
+}
+
+export async function deleteOwnerRequest(id: string) {
+  const { data } = await api.delete(`/admin/requests/${id}`)
+  return data
+}
+
+export async function deactivateOwnerRequest(id: string) {
+  const { data } = await api.post(`/admin/requests/${id}/deactivate`)
+  return data
+}
+
 export async function fetchSubscriptions() {
   const { data } = await api.get<Subscription[]>('/admin/subscriptions')
   return data

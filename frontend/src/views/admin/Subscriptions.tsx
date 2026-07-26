@@ -7,7 +7,7 @@ import {
   updateSubscriptionStatus,
 } from '../../services/api'
 import type { Subscription } from '../../types'
-import { CreditCard } from 'lucide-react'
+import { CreditCard, KeyRound, Ban, Check } from 'lucide-react'
 
 const Subscriptions: React.FC = () => {
   const { push } = useToast()
@@ -108,8 +108,6 @@ const Subscriptions: React.FC = () => {
                     <tr key={s.id}>
                       <td>
                         <strong>{s.ownerName}</strong>
-                        <div className="muted">{s.companyName}</div>
-                        <div className="muted">{s.ownerEmail}</div>
                       </td>
                       <td>{s.planName}</td>
                       <td>{s.seats}</td>
@@ -123,29 +121,35 @@ const Subscriptions: React.FC = () => {
                         <div className="action-buttons">
                           <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="btn-icon btn-icon--blue"
                             disabled={busyId === s.ownerId || busyId === s.id}
+                            title="Issue keys"
+                            aria-label="Issue keys"
                             onClick={() => void onIssueKeys(s.ownerId)}
                           >
-                            Issue keys
+                            <KeyRound size={16} />
                           </button>
                           {s.status === 'ACTIVE' ? (
                             <button
                               type="button"
-                              className="btn btn-danger"
+                              className="btn-icon btn-icon--green"
                               disabled={busyId === s.id}
+                              title="Suspend"
+                              aria-label="Suspend"
                               onClick={() => void onStatus(s.id, 'SUSPENDED')}
                             >
-                              Suspend
+                              <Ban size={16} />
                             </button>
                           ) : (
                             <button
                               type="button"
-                              className="btn btn-primary"
+                              className="btn-icon btn-icon--green"
                               disabled={busyId === s.id}
+                              title="Activate"
+                              aria-label="Activate"
                               onClick={() => void onStatus(s.id, 'ACTIVE')}
                             >
-                              Activate
+                              <Check size={16} />
                             </button>
                           )}
                         </div>

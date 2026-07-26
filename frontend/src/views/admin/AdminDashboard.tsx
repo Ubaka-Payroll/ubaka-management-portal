@@ -130,7 +130,7 @@ const AdminDashboard: React.FC = () => {
 
       <div className="panel">
         <div className="panel__head">
-          <h2 className="panel__title">Subscriptions snapshot</h2>
+          <h2 className="panel__title">Subscriptions</h2>
           <Users size={18} color="var(--text-faint)" />
         </div>
         <div className="panel__body" style={{ padding: 0 }}>

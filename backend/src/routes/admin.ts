@@ -130,6 +130,105 @@ router.post('/requests/:id/reject', (req, res) => {
   return res.json({ message: 'Request rejected' })
 })
 
+router.patch('/requests/:id', (req, res) => {
+  const { id } = req.params
+  const { fullName, email, companyName, phone, message } = req.body as {
+    fullName?: string
+    email?: string
+    companyName?: string
+    phone?: string
+    message?: string
+  }
+
+  const db = readDb()
+  const request = db.ownerRequests.find((r) => r.id === id)
+  if (!request) return res.status(404).json({ error: 'Request not found' })
+
+  if (!fullName?.trim() || !email?.trim() || !companyName?.trim() || !phone?.trim()) {
+    return res.status(400).json({ error: 'Full name, email, company, and phone are required' })
+  }
+
+  const emailTaken = db.ownerRequests.find(
+    (r) => r.id !== id && r.email.toLowerCase() === email.trim().toLowerCase(),
+  )
+  if (emailTaken) {
+    return res.status(409).json({ error: 'Another request already uses this email' })
+  }
+
+  const previousEmail = request.email
+
+  updateDb((store) => {
+    const reqItem = store.ownerRequests.find((r) => r.id === id)!
+    reqItem.fullName = fullName.trim()
+    reqItem.email = email.trim()
+    reqItem.companyName = companyName.trim()
+    reqItem.phone = phone.trim()
+    reqItem.message = message?.trim() || undefined
+
+    if (reqItem.status === 'APPROVED') {
+      const owner = store.users.find(
+        (u) => u.role === 'SITE_OWNER' && u.email.toLowerCase() === previousEmail.toLowerCase(),
+      )
+      if (owner) {
+        owner.fullName = reqItem.fullName
+        owner.email = reqItem.email
+        owner.companyName = reqItem.companyName
+        owner.phone = reqItem.phone
+      }
+    }
+  })
+
+  return res.json({ message: 'Request updated' })
+})
+
+router.delete('/requests/:id', (req, res) => {
+  const { id } = req.params
+  const db = readDb()
+  const request = db.ownerRequests.find((r) => r.id === id)
+  if (!request) return res.status(404).json({ error: 'Request not found' })
+
+  updateDb((store) => {
+    store.ownerRequests = store.ownerRequests.filter((r) => r.id !== id)
+  })
+
+  return res.json({ message: 'Request deleted' })
+})
+
+router.post('/requests/:id/deactivate', (req, res) => {
+  const { id } = req.params
+  const db = readDb()
+  const request = db.ownerRequests.find((r) => r.id === id)
+  if (!request) return res.status(404).json({ error: 'Request not found' })
+  if (request.status === 'DEACTIVATED') {
+    return res.status(400).json({ error: 'Request is already deactivated' })
+  }
+  if (request.status === 'REJECTED') {
+    return res.status(400).json({ error: 'Rejected requests cannot be deactivated' })
+  }
+
+  const now = new Date().toISOString()
+
+  updateDb((store) => {
+    const reqItem = store.ownerRequests.find((r) => r.id === id)!
+    const wasApproved = reqItem.status === 'APPROVED'
+    reqItem.status = 'DEACTIVATED'
+    reqItem.reviewedBy = req.user!.id
+    reqItem.reviewedAt = now
+
+    if (wasApproved) {
+      const owner = store.users.find(
+        (u) => u.role === 'SITE_OWNER' && u.email.toLowerCase() === reqItem.email.toLowerCase(),
+      )
+      if (owner) {
+        const sub = store.subscriptions.find((s) => s.ownerId === owner.id)
+        if (sub) sub.status = 'SUSPENDED'
+      }
+    }
+  })
+
+  return res.json({ message: 'Request deactivated' })
+})
+
 router.get('/subscriptions', (_req, res) => {
   const db = readDb()
   const rows = db.subscriptions.map((s) => {

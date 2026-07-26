@@ -1,6 +1,6 @@
 export type Role = 'SYSTEM_ADMIN' | 'SITE_OWNER' | 'FIELD_ENGINEER'
 
-export type RequestStatus = 'PENDING' | 'APPROVED' | 'REJECTED'
+export type RequestStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'DEACTIVATED'
 export type SubscriptionStatus = 'NONE' | 'ACTIVE' | 'EXPIRED' | 'SUSPENDED'
 export type EngineerStatus = 'PENDING_ACTIVATION' | 'ACTIVE' | 'DISABLED'
 
