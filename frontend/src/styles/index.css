@@ -701,6 +701,7 @@ img {
   font-weight: 500;
 }
 
+input:not([type]),
 input[type='text'],
 input[type='email'],
 input[type='password'],
@@ -716,6 +717,18 @@ textarea {
   background: var(--surface);
   color: var(--text);
   transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+input:not([type])::placeholder,
+input[type='text']::placeholder,
+input[type='email']::placeholder,
+input[type='password']::placeholder,
+input[type='tel']::placeholder,
+input[type='number']::placeholder,
+input[type='search']::placeholder,
+textarea::placeholder {
+  color: var(--text-faint);
+  font-weight: 500;
 }
 
 input:focus,
@@ -1744,6 +1757,10 @@ table.data-table tbody tr:last-child td {
   padding: 1.35rem;
 }
 
+.modal--form {
+  width: min(440px, 100%);
+}
+
 .modal__title {
   font-family: var(--font-display);
   font-size: 1.05rem;
@@ -1757,11 +1774,46 @@ table.data-table tbody tr:last-child td {
   margin-bottom: 1rem;
 }
 
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.modal__form .form-group label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.modal__form input:not([type]),
+.modal__form input[type='text'],
+.modal__form input[type='email'],
+.modal__form input[type='tel'],
+.modal__form input[type='password'],
+.modal__form textarea {
+  padding: 0.8rem 0.95rem;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.modal__form input:focus,
+.modal__form textarea:focus {
+  background: var(--surface);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(39, 40, 51, 0.1);
+}
+
 .modal__actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
-  margin-top: 1.15rem;
+  margin-top: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
 }
 
 .copy-row {

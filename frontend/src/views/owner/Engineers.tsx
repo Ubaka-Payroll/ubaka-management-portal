@@ -134,47 +134,60 @@ const Engineers: React.FC = () => {
 
       {showForm && (
         <div className="modal-backdrop" role="presentation" onClick={() => setShowForm(false)}>
-          <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="modal modal--form"
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h3 className="modal__title">Add Field Engineer</h3>
             <p className="modal__desc">An available activation key will be assigned automatically.</p>
-            <form className="inline-form" onSubmit={onSubmit}>
-              <div className="form-grid">
-                <div className="form-group">
-                  <label htmlFor="fullName">Full name</label>
-                  <input
-                    id="fullName"
-                    required
-                    value={form.fullName}
-                    onChange={(e) => setForm((p) => ({ ...p, fullName: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone</label>
-                  <input
-                    id="phone"
-                    value={form.phone}
-                    onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="siteName">Site name</label>
-                  <input
-                    id="siteName"
-                    required
-                    value={form.siteName}
-                    onChange={(e) => setForm((p) => ({ ...p, siteName: e.target.value }))}
-                  />
-                </div>
+            <form className="modal__form" onSubmit={onSubmit}>
+              <div className="form-group">
+                <label htmlFor="fullName">Full name</label>
+                <input
+                  id="fullName"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  placeholder="e.g. Lydia Numwali"
+                  value={form.fullName}
+                  onChange={(e) => setForm((p) => ({ ...p, fullName: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="name@company.com"
+                  value={form.email}
+                  onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder="07XX XXX XXX"
+                  value={form.phone}
+                  onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="siteName">Site name</label>
+                <input
+                  id="siteName"
+                  type="text"
+                  required
+                  placeholder="e.g. Kigali Heights Site A"
+                  value={form.siteName}
+                  onChange={(e) => setForm((p) => ({ ...p, siteName: e.target.value }))}
+                />
               </div>
               <div className="modal__actions">
                 <button type="button" className="btn btn-ghost" onClick={() => setShowForm(false)}>

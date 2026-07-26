@@ -279,61 +279,62 @@ const OwnerRequests: React.FC = () => {
       {editing && (
         <div className="modal-backdrop" role="presentation" onClick={() => setEditing(null)}>
           <div
-            className="modal"
+            className="modal modal--form"
             role="dialog"
             aria-modal="true"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="modal__title">Edit request</h3>
             <p className="modal__desc">Update applicant details for this site owner request.</p>
-            <form className="inline-form" onSubmit={onSaveEdit}>
-              <div className="form-grid">
-                <div className="form-group">
-                  <label htmlFor="edit-fullName">Full name</label>
-                  <input
-                    id="edit-fullName"
-                    required
-                    value={editForm.fullName}
-                    onChange={(e) => setEditForm((p) => ({ ...p, fullName: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="edit-email">Email</label>
-                  <input
-                    id="edit-email"
-                    type="email"
-                    required
-                    value={editForm.email}
-                    onChange={(e) => setEditForm((p) => ({ ...p, email: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="edit-company">Company</label>
-                  <input
-                    id="edit-company"
-                    required
-                    value={editForm.companyName}
-                    onChange={(e) => setEditForm((p) => ({ ...p, companyName: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="edit-phone">Phone</label>
-                  <input
-                    id="edit-phone"
-                    required
-                    value={editForm.phone}
-                    onChange={(e) => setEditForm((p) => ({ ...p, phone: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group form-group-full">
-                  <label htmlFor="edit-message">Message</label>
-                  <textarea
-                    id="edit-message"
-                    rows={3}
-                    value={editForm.message}
-                    onChange={(e) => setEditForm((p) => ({ ...p, message: e.target.value }))}
-                  />
-                </div>
+            <form className="modal__form" onSubmit={onSaveEdit}>
+              <div className="form-group">
+                <label htmlFor="edit-fullName">Full name</label>
+                <input
+                  id="edit-fullName"
+                  type="text"
+                  required
+                  value={editForm.fullName}
+                  onChange={(e) => setEditForm((p) => ({ ...p, fullName: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="edit-email">Email</label>
+                <input
+                  id="edit-email"
+                  type="email"
+                  required
+                  value={editForm.email}
+                  onChange={(e) => setEditForm((p) => ({ ...p, email: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="edit-company">Company</label>
+                <input
+                  id="edit-company"
+                  type="text"
+                  required
+                  value={editForm.companyName}
+                  onChange={(e) => setEditForm((p) => ({ ...p, companyName: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="edit-phone">Phone</label>
+                <input
+                  id="edit-phone"
+                  type="tel"
+                  required
+                  value={editForm.phone}
+                  onChange={(e) => setEditForm((p) => ({ ...p, phone: e.target.value }))}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="edit-message">Message</label>
+                <textarea
+                  id="edit-message"
+                  rows={3}
+                  value={editForm.message}
+                  onChange={(e) => setEditForm((p) => ({ ...p, message: e.target.value }))}
+                />
               </div>
               <div className="modal__actions">
                 <button type="button" className="btn btn-ghost" onClick={() => setEditing(null)}>

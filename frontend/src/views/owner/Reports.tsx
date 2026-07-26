@@ -35,9 +35,6 @@ const Reports: React.FC = () => {
     <div className="stack-gap">
       {error && <Alert variant="error" message={error} actionLabel="Retry" onAction={load} />}
 
-      <p className="muted">
-        Daily summaries from Field Engineers using the Ubaka desktop app appear here.
-      </p>
 
       <div className="panel">
         <div className="panel__head">
